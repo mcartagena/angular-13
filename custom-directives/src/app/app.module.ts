@@ -5,13 +5,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HighlightDirective } from './CustomDirective/highlight.directive';
 import { HoverDirective } from './CustomDirective/hover.directive';
+import { BetterhighlightDirective } from './CustomDirective/betterhighlight.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     SetBackgroundDirective,
     HighlightDirective,
-    HoverDirective
+    HoverDirective,
+    BetterhighlightDirective
   ],
   imports: [
     BrowserModule

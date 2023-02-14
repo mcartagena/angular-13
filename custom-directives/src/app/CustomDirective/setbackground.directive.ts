@@ -7,7 +7,7 @@ export class SetBackgroundDirective implements OnInit{
 
   constructor(private element: ElementRef){
     // element.nativeElement.style.backgroundColor = '#C8E6C9';
-    this.element = element;
+    // this.element = element;
   }
 
   ngOnInit(){
