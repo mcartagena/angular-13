@@ -1,6 +1,6 @@
 <div class="container">
   <div class="video-container" *ngFor="let video of videos">
-    <div class="video-card">
+    <div class="video-card" [appHighlight]="video.likes === mostLikedVideo.likes">
       <div>
         <img [src]="video.thumbnail" style="width: 220px; height: 210px" />
       </div>
