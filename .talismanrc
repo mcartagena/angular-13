@@ -1,0 +1,4 @@
+fileignoreconfig:
+- filename: typescript-intro/decorator.js
+  checksum: fb888720d94b32543fb2fb40e9ccf8c2bc10f545962f2f49e38f8e244d88d523
+version: "1.0"
