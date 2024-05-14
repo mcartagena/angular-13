@@ -1,1 +1,2 @@
-<img [src]="postImg">
+<img [src]="postImg" (click)="imgSelected.emit(postImg)">
+<ng-content></ng-content>
