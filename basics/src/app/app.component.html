@@ -5,6 +5,11 @@
 </app-post>
 
 <p>Project {{ title }}</p>
-<p>Hello {{ name.toUpperCase() }}</p>
+<p>Hello {{ name | titlecase }}</p>
 <p>Hello {{ getName() }}</p>
 <p> {{ 20 + 34 }}</p>
+<p> {{ currentDate | date: 'MMMM d'}}</p>
+<p>{{ cost | currency: 'JPY' }}</p>
+<p>{{ temperature | number: '1.0-0' }}</p>
+<pre>{{ pizza | json }}</pre>
+

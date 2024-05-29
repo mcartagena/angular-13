@@ -2,7 +2,7 @@ fileignoreconfig:
 - filename: basics/src/app/app.component.html
   checksum: 450b5e381b4b60a90b0a8c2980ef163b8e0762664adfc2be8b7a5fdd905f9ea7
 - filename: basics/src/app/app.component.ts
-  checksum: a4bab728551b07891738b7bd018ee77bf4f78cdc3a96ac8c5b55bdb72a3b4171
+  checksum: b266cd1ca23815c48df3305ff711877ddd7af1838f0bb083a94adc7b70aa7121
 - filename: typescript-intro/decorator.js
   checksum: fb888720d94b32543fb2fb40e9ccf8c2bc10f545962f2f49e38f8e244d88d523
 version: "1.0"
