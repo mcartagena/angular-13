@@ -1,2 +1,2 @@
-# angular-13
-Hands on agular 13+
+# angular-17
+Hands on agular 13, 17+
