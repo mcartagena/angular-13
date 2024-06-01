@@ -2,7 +2,21 @@ fileignoreconfig:
 - filename: basics/src/app/app.component.html
   checksum: 450b5e381b4b60a90b0a8c2980ef163b8e0762664adfc2be8b7a5fdd905f9ea7
 - filename: basics/src/app/app.component.ts
-  checksum: b266cd1ca23815c48df3305ff711877ddd7af1838f0bb083a94adc7b70aa7121
+  checksum: 3f2930cc63214fa4ef6c6d1c9a14ee427e30a9440fa99feac497cc00f59f54af
+- filename: clips/src/app/app.component.html
+  checksum: ccce2d3fe2eaf0d32c96234c47cde1dd2a7314b470be141604cf55015ad209bd
+- filename: clips/template/404.html
+  checksum: e2fd83be41cfc11764caa4e2845e42481d940e4e18ece1d2f21adc8701dd6191
+- filename: clips/template/about.html
+  checksum: ac873753291eb5b6da34ecd84291aa8eb3967f6c1ac12fd45f39d2b5d02772b8
+- filename: clips/template/index.html
+  checksum: 96ce86031c4500ce219a9acf2b770047e6660c96c5b199277cba36aac30545b2
+- filename: clips/template/manage.html
+  checksum: 306fb1d4218874d3c58557bbc9cacaf72c5a965e739fc95a28710ff62133ef77
+- filename: clips/template/upload.html
+  checksum: 8ceffb676b9ec6df903204dd9d99e1a89b53a9d57864584c371d8aa30e130a77
+- filename: clips/template/video.html
+  checksum: 8f112973e6e9c07166bb6900bcb433319379f7c7bfee5cbaf6b2f2f4ef0f22c8
 - filename: typescript-intro/decorator.js
   checksum: fb888720d94b32543fb2fb40e9ccf8c2bc10f545962f2f49e38f8e244d88d523
 version: "1.0"
