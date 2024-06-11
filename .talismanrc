@@ -5,6 +5,8 @@ fileignoreconfig:
   checksum: 3f2930cc63214fa4ef6c6d1c9a14ee427e30a9440fa99feac497cc00f59f54af
 - filename: clips/src/app/app.component.html
   checksum: ccce2d3fe2eaf0d32c96234c47cde1dd2a7314b470be141604cf55015ad209bd
+- filename: clips/src/app/nav/nav.component.html
+  checksum: f3fc3fdc4c90efd87255a1c1afdd039d94ccf93fa008ec2177fda74ad59f983a
 - filename: clips/template/404.html
   checksum: e2fd83be41cfc11764caa4e2845e42481d940e4e18ece1d2f21adc8701dd6191
 - filename: clips/template/about.html
