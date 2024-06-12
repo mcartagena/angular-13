@@ -14,5 +14,5 @@ import { AuthModalComponent } from './user/auth-modal/auth-modal.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'clips';
+
 }
