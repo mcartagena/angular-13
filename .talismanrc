@@ -8,7 +8,7 @@ fileignoreconfig:
 - filename: clips/src/app/nav/nav.component.html
   checksum: f3fc3fdc4c90efd87255a1c1afdd039d94ccf93fa008ec2177fda74ad59f983a
 - filename: clips/src/app/user/register/register.component.ts
-  checksum: a092a5b7f457f2fadd251170780c0d572d57406af1f66366c7f0c3dfee62b744
+  checksum: 3c9a12b4cb6df5ddc491a2daf005a39e281b8809ead686464044259bc2fad7d9
 - filename: clips/template/404.html
   checksum: e2fd83be41cfc11764caa4e2845e42481d940e4e18ece1d2f21adc8701dd6191
 - filename: clips/template/about.html
