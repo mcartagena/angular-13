@@ -7,8 +7,10 @@ fileignoreconfig:
   checksum: ccce2d3fe2eaf0d32c96234c47cde1dd2a7314b470be141604cf55015ad209bd
 - filename: clips/src/app/nav/nav.component.html
   checksum: f3fc3fdc4c90efd87255a1c1afdd039d94ccf93fa008ec2177fda74ad59f983a
+- filename: clips/src/app/user/register/register.component.html
+  checksum: afb93ed9c60f3c5890b59e446a3fbc03e1ef8f68fd6c10586011c1d0c4668f4d
 - filename: clips/src/app/user/register/register.component.ts
-  checksum: 3c9a12b4cb6df5ddc491a2daf005a39e281b8809ead686464044259bc2fad7d9
+  checksum: 7709fee46e57612e449cb130899a40605ea9cba5b4518bcc8f7004b264e929ce
 - filename: clips/template/404.html
   checksum: e2fd83be41cfc11764caa4e2845e42481d940e4e18ece1d2f21adc8701dd6191
 - filename: clips/template/about.html
