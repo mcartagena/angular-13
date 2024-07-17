@@ -1,10 +1,9 @@
-import { of } from "rxjs";
-import { map } from "rxjs";
+import { of, fromEvent } from "rxjs";
+import { map, filter } from "rxjs";
 
-const observable = of(1,2,3,4,5)
-
-const numbersWithSymbol= observable.pipe(
-    map((value) => `$${value}`)
+const observable = fromEvent(document,'keydown').pipe(
+    map((event) => event.code),
+    filter((code) => code === 'Space')
 )
 
 const subscription = observable.subscribe({
