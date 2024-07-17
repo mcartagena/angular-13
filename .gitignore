@@ -45,3 +45,4 @@
 # custom
 **/package-lock.json
 .gitignore
+**/.cache
