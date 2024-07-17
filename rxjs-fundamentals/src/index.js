@@ -1,12 +1,15 @@
-import { fromEvent } from "rxjs";
-import { mergeMap } from "rxjs/operators";
+import { fromEvent, interval } from "rxjs";
+import { mergeMap, take, tap } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
 
 const button = document.querySelector("#btn");
 
 const observable = fromEvent(button, "click").pipe(
     mergeMap(() => {
-    return ajax.getJSON("https://jsonplaceholder.typicode.com/todos/1");
+    return interval(1000).pipe(
+        tap(console.log),
+        take(5)
+    );
   })
 );
 
