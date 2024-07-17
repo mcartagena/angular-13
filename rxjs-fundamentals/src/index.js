@@ -1,8 +1,9 @@
-import { of } from "rxjs";
-import { reduce } from "rxjs/operators";
+import { interval } from "rxjs";
+import { reduce, take, scan } from "rxjs/operators";
 
-const observable = of(1,2,3,4,5).pipe(
-    reduce(
+const observable = interval(500).pipe(
+    take(5),
+    scan(
         (acumulator, value) => acumulator + value
         ,5)
 )
