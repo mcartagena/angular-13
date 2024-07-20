@@ -5,5 +5,8 @@ import { routes } from './app.routes';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes),provideEnvironmentNgxMask()]
+  providers: [
+    provideRouter(routes),
+    provideEnvironmentNgxMask()
+  ]
 };

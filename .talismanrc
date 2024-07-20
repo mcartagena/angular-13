@@ -13,6 +13,10 @@ fileignoreconfig:
   checksum: afb93ed9c60f3c5890b59e446a3fbc03e1ef8f68fd6c10586011c1d0c4668f4d
 - filename: clips/src/app/user/register/register.component.ts
   checksum: 7709fee46e57612e449cb130899a40605ea9cba5b4518bcc8f7004b264e929ce
+- filename: clips/src/environments/environment.prod.ts
+  checksum: c7a63948fbc9830c82ae8150db2a293046ec1a2f1bed1e1b8d5a64fd5f6b7cfa
+- filename: clips/src/environments/environment.ts
+  checksum: 8b54565abbefe15718d417a0bb3d263e7f4c41b74c15c836206c09753b7d69c3
 - filename: clips/template/404.html
   checksum: e2fd83be41cfc11764caa4e2845e42481d940e4e18ece1d2f21adc8701dd6191
 - filename: clips/template/about.html
