@@ -1,14 +1,18 @@
 import { fromEvent, interval } from "rxjs";
-import { mergeMap, take, tap } from "rxjs/operators";
+import { switchMap, take, tap } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
 
 const button = document.querySelector("#btn");
 
 const observable = fromEvent(button, "click").pipe(
-    mergeMap(() => {
+    switchMap(() => {
     return interval(1000).pipe(
-        tap(console.log),
-        take(5)
+        take(5),
+        tap({
+            complete(){
+                console.log('inner observable completed')
+            }
+        })
     );
   })
 );
