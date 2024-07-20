@@ -1,12 +1,12 @@
 import { fromEvent, interval } from "rxjs";
-import { switchMap, take, tap } from "rxjs/operators";
+import { concatMap, take, tap } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
 
 const button = document.querySelector("#btn");
 
 const observable = fromEvent(button, "click").pipe(
-    switchMap(() => {
-    return ajax.getJSON('https://jsonplaceholder.typicode.com/todos/1').pipe(
+    concatMap(() => {
+    return ajax.getJSON('https://jsonplaceholder.typicode.com/todos/1   ').pipe(
         take(5),
         tap({
             complete(){
