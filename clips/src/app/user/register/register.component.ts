@@ -1,4 +1,3 @@
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Component, OnInit } from '@angular/core';
 import {
   ReactiveFormsModule,
@@ -9,6 +8,8 @@ import {
 import { JsonPipe, NgIf } from '@angular/common';
 import { InputComponent } from '../../shared/input/input.component';
 import { AlertComponent } from '../../shared/alert/alert.component';
+import { AuthService } from '../../services/auth.service';
+import IUser from '../../models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +28,7 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   name = new FormControl('', [Validators.required, Validators.minLength(3)]);
   email = new FormControl('', [Validators.required, Validators.email]);
-  age = new FormControl('', [
+  age = new FormControl<number | null>(null, [
     Validators.required,
     Validators.min(18),
     Validators.max(120),
@@ -47,7 +48,9 @@ export class RegisterComponent implements OnInit {
   alertColor = 'blue';
   inSubmission = false;
 
-  constructor(private auth: AngularFireAuth) {}
+  constructor(
+    private auth: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -66,14 +69,9 @@ export class RegisterComponent implements OnInit {
     this.alertColor = 'blue';
     this.inSubmission = true;
 
-    const { email, password } = this.registerForm.value;
-
     try {
-      const userCredentials = await this.auth.createUserWithEmailAndPassword(
-        email as string,
-        password as string
-      );
-      console.log(userCredentials)
+      await this.auth.createUser(this.registerForm.value as IUser)
+
     } catch (error) {
       console.error(error)
       this.alertMsg = 'An unexpected error occurred. Please try again later'
