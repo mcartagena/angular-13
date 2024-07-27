@@ -6,7 +6,7 @@ fileignoreconfig:
 - filename: clips/src/app/app.component.html
   checksum: ccce2d3fe2eaf0d32c96234c47cde1dd2a7314b470be141604cf55015ad209bd
 - filename: clips/src/app/nav/nav.component.html
-  checksum: f3fc3fdc4c90efd87255a1c1afdd039d94ccf93fa008ec2177fda74ad59f983a
+  checksum: 674eda342db9af4ff9568c00b2507bde7ae75d604ff3e0412d780d12ba72ba6a
 - filename: clips/src/app/user/login/login.component.html
   checksum: c77376ceb4e0b908678e9762080f8cb326c90a6e510bf23da2d3c183ac135fec
 - filename: clips/src/app/user/register/register.component.html
