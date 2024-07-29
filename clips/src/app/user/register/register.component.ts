@@ -10,6 +10,7 @@ import { InputComponent } from '../../shared/input/input.component';
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { AuthService } from '../../services/auth.service';
 import IUser from '../../models/user.model';
+import { RegisterValidators } from '../validators/register-validators';
 
 @Component({
   selector: 'app-register',
@@ -60,7 +61,7 @@ export class RegisterComponent implements OnInit {
       password: this.password,
       confirm_password: this.confirm_password,
       phoneNumber: this.phoneNumber,
-    });
+    }, [RegisterValidators.match('password','confirm_password')]);
   }
 
   async register() {
