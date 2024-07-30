@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { NgIf } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -11,6 +12,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   imports: [
     NgIf,
     CommonModule,
+    RouterModule,
   ],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css'
