@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ManageComponent } from './video/manage/manage.component';
+import { UploadComponent } from './video/upload/upload.component';
 
 export const routes: Routes = [
 {
@@ -15,6 +16,13 @@ export const routes: Routes = [
 {
   path: 'manage',
   component: ManageComponent,
+  data: {
+    authOnly: true
+  }
+},
+{
+  path: 'upload',
+  component: UploadComponent,
   data: {
     authOnly: true
   }
