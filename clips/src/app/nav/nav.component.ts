@@ -3,7 +3,6 @@ import { ModalService } from '../services/modal.service';
 import { AuthService } from '../services/auth.service';
 import { NgIf } from '@angular/common';
 import { CommonModule } from '@angular/common';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -21,8 +20,7 @@ export class NavComponent {
 
   constructor(
     public modal: ModalService,
-    public auth: AuthService,
-    private afAuth: AngularFireAuth
+    public auth: AuthService
   ){
   }
 
@@ -30,11 +28,6 @@ export class NavComponent {
     $event.preventDefault()  // prevent to call another nav option
 
     this.modal.toggleModal('auth')
-  }
-  async logout($event: Event){
-    $event.preventDefault()
-
-    await this.afAuth.signOut()
   }
 
 }
