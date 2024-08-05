@@ -1,6 +1,15 @@
 import { EventBlockerDirective } from './../../shared/directives/event-blocker.directive';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
+import {
+  ReactiveFormsModule,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { InputComponent } from '../../shared/input/input.component';
+import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/compat/storage'
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-upload',
@@ -9,26 +18,50 @@ import { NgClass, NgIf } from '@angular/common';
     EventBlockerDirective,
     NgClass,
     NgIf,
+    ReactiveFormsModule,
+    InputComponent,
+    AngularFireStorageModule
   ],
   templateUrl: './upload.component.html',
-  styleUrl: './upload.component.css'
+  styleUrl: './upload.component.css',
 })
-export class UploadComponent {
-  isDragOver = false
-  nextStep = false
-  file: File | null = null
+export class UploadComponent implements OnInit {
+  isDragOver = false;
+  nextStep = false;
+  file: File | null = null;
 
-  storeFile($event: Event){
-    this.isDragOver = false
+  title = new FormControl('', {
+    validators: [Validators.required, Validators.minLength(3)],
+    nonNullable: true,
+  });
 
-    this.file = ($event as DragEvent).dataTransfer?.files.item(0) ?? null
+  uploadForm = new FormGroup({
+    title: this.title,
+  });
 
-    if(!this.file || this.file.type !== 'video/mp4'){
-      return
-    }
-
-    this.nextStep = true
+  constructor(private storage: AngularFireStorage){
 
   }
+  ngOnInit(): void {}
 
+  storeFile($event: Event) {
+    this.isDragOver = false;
+
+    this.file = ($event as DragEvent).dataTransfer?.files.item(0) ?? null;
+
+    if (!this.file || this.file.type !== 'video/mp4') {
+      return;
+    }
+
+    this.title.setValue(this.file.name.replace(/\.[^/.]+$/, ''));
+
+    this.nextStep = true;
+  }
+
+  uploadFile(){
+    const clipFileName = uuid()
+    const clipPath = `clips/${clipFileName}.mp4`
+
+    this.storage.upload(clipPath,this.file)
+  }
 }
