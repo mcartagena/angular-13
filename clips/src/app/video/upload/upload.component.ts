@@ -10,6 +10,9 @@ import {
 import { InputComponent } from '../../shared/input/input.component';
 import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/compat/storage'
 import { v4 as uuid } from 'uuid';
+import { AlertComponent } from '../../shared/alert/alert.component';
+import { PercentPipe } from '@angular/common';
+import { last } from 'rxjs';
 
 @Component({
   selector: 'app-upload',
@@ -20,7 +23,9 @@ import { v4 as uuid } from 'uuid';
     NgIf,
     ReactiveFormsModule,
     InputComponent,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AlertComponent,
+    PercentPipe,
   ],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.css',
@@ -38,6 +43,14 @@ export class UploadComponent implements OnInit {
   uploadForm = new FormGroup({
     title: this.title,
   });
+
+  showAlert = false;
+  alertMsg = 'Please wait! Your clip is being uploaded.';
+  alertColor = 'blue';
+  inSubmission = false;
+
+  percentage = 0
+  showPercentage = false
 
   constructor(private storage: AngularFireStorage){
 
@@ -62,6 +75,34 @@ export class UploadComponent implements OnInit {
     const clipFileName = uuid()
     const clipPath = `clips/${clipFileName}.mp4`
 
-    this.storage.upload(clipPath,this.file)
+    this.showAlert = true;
+    this.alertMsg = 'Please wait! Your clip is being uploaded.';
+    this.alertColor = 'blue';
+    this.inSubmission = true
+    this.showPercentage = true
+
+
+    const task = this.storage.upload(clipPath,this.file)
+
+    task.percentageChanges().subscribe(progress => {
+      this.percentage = progress as number / 100
+    })
+
+    task.snapshotChanges().pipe(
+      last()
+    ).subscribe({
+      next: (snapshot) => {
+        this.alertColor = 'green'
+        this.alertMsg = 'Success! Your clip is now ready to share with the world.'
+        this.showPercentage = false
+      },
+      error: (error) => {
+        this.alertColor = 'red'
+        this.alertMsg = 'Upload failed! Please try again later.'
+        this.inSubmission = true
+        this.showPercentage = false
+        console.error(error)
+      }
+    })
   }
 }
