@@ -1,3 +1,4 @@
+import { ClipService } from './../../servicves/clip.service';
 import { EventBlockerDirective } from './../../shared/directives/event-blocker.directive';
 import { Component, OnInit } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
@@ -12,7 +13,9 @@ import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/comp
 import { v4 as uuid } from 'uuid';
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { PercentPipe } from '@angular/common';
-import { last } from 'rxjs';
+import { last, switchMap } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app'
 
 @Component({
   selector: 'app-upload',
@@ -52,8 +55,14 @@ export class UploadComponent implements OnInit {
   percentage = 0
   showPercentage = false
 
-  constructor(private storage: AngularFireStorage){
+  user: firebase.User | null = null
 
+  constructor(
+    private storage: AngularFireStorage,
+    private auth: AngularFireAuth,
+    private clipService: ClipService
+  ){
+      auth.user.subscribe(user => this.user = user)
   }
   ngOnInit(): void {}
 
@@ -83,15 +92,29 @@ export class UploadComponent implements OnInit {
 
 
     const task = this.storage.upload(clipPath,this.file)
+    const clipRef = this.storage.ref(clipPath)
 
     task.percentageChanges().subscribe(progress => {
       this.percentage = progress as number / 100
     })
 
     task.snapshotChanges().pipe(
-      last()
+      last(),
+      switchMap(() => clipRef.getDownloadURL())
     ).subscribe({
-      next: (snapshot) => {
+      next: (url) => {
+        const clip = {
+          uid: this.user?.uid as string,
+          displayName: this.user?.displayName as string,
+          title: this.title.value,
+          fileName: `${clipFileName}.mp4`,
+          url
+        }
+
+        this.clipService.createClip(clip)
+
+        console.log(clip)
+
         this.alertColor = 'green'
         this.alertMsg = 'Success! Your clip is now ready to share with the world.'
         this.showPercentage = false
