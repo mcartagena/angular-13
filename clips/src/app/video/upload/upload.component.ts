@@ -17,7 +17,7 @@ import {
 import { v4 as uuid } from 'uuid';
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { PercentPipe } from '@angular/common';
-import { last, switchMap } from 'rxjs';
+import { last, switchMap, timestamp } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
@@ -125,6 +125,7 @@ export class UploadComponent implements OnDestroy {
             title: this.title.value,
             fileName: `${clipFileName}.mp4`,
             url,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
           };
 
           const clipDocRef = await this.clipService.createClip(clip);
