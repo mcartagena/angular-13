@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { ModalService } from '../../services/modal.service';
 import IClip from '../../models/clip.model';
@@ -24,6 +24,7 @@ import { AlertComponent } from '../../shared/alert/alert.component';
 })
 export class EditComponent implements OnInit, OnDestroy, OnChanges{
   @Input() activeClip: IClip | null = null
+  @Output() update = new EventEmitter()
   clipID = new FormControl('',{
     nonNullable: true
   })
@@ -41,6 +42,7 @@ export class EditComponent implements OnInit, OnDestroy, OnChanges{
   alertColor = "blue"
   alertMsg = "Please wait! Updating Clip."
 
+
   constructor(private modal: ModalService,
     private clipService: ClipService
   ){
@@ -53,8 +55,6 @@ export class EditComponent implements OnInit, OnDestroy, OnChanges{
 
     this.inSubmission = false
     this.showAlert = false
-    this.alertColor = "blue"
-    this.alertMsg = "Please wait! Updating Clip."
 
     this.clipID.setValue(this.activeClip.docID as string)
     this.title.setValue(this.activeClip.title)
@@ -67,6 +67,9 @@ export class EditComponent implements OnInit, OnDestroy, OnChanges{
   }
 
   async submit(){
+    if(!this.activeClip){
+      return
+    }
     this.inSubmission = true
     this.showAlert = true
     this.alertColor = "blue"
@@ -81,6 +84,10 @@ export class EditComponent implements OnInit, OnDestroy, OnChanges{
 
       return
     }
+
+    this.activeClip.title = this.title.value
+    this.update.emit(this.activeClip)
+
     this.inSubmission = false
     this.alertColor = 'green'
     this.alertMsg = 'Success!'
