@@ -31,6 +31,8 @@ fileignoreconfig:
   checksum: 8ceffb676b9ec6df903204dd9d99e1a89b53a9d57864584c371d8aa30e130a77
 - filename: clips/template/video.html
   checksum: 8f112973e6e9c07166bb6900bcb433319379f7c7bfee5cbaf6b2f2f4ef0f22c8
+- filename: image-effects/Cargo.lock
+  checksum: b1c45c7c8a2b0d0fb0cb6d622f84d4d969a2484d8b5fa404aacb3cc01feffc09
 - filename: typescript-intro/decorator.js
   checksum: fb888720d94b32543fb2fb40e9ccf8c2bc10f545962f2f49e38f8e244d88d523
 version: "1.0"
