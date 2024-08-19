@@ -1,7 +1,7 @@
 use wasm_bindgen::prelude::wasm_bindgen;
 use web_sys::console::log_1 as log;
 use base64::{engine::general_purpose, Engine as _};
-use image::{load_from_memory, ImageFormat, DynamicImage, ImageBuffer, Luma};
+use image::{load_from_memory, ImageFormat};
 use std::io::Cursor;
 
 #[wasm_bindgen]
