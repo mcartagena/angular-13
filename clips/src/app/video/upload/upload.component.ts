@@ -1,7 +1,8 @@
+import { FfmpegService } from './../../services/ffmpeg.service';
 import { ClipService } from './../../servicves/clip.service';
 import { EventBlockerDirective } from './../../shared/directives/event-blocker.directive';
 import { Component, OnDestroy } from '@angular/core';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 import {
   ReactiveFormsModule,
   FormControl,
@@ -21,6 +22,7 @@ import { last, switchMap, timestamp } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
+import { SafeURLPipe } from '../pipes/safe-url.pipe';
 
 @Component({
   selector: 'app-upload',
@@ -29,11 +31,13 @@ import { Router } from '@angular/router';
     EventBlockerDirective,
     NgClass,
     NgIf,
+    NgFor,
     ReactiveFormsModule,
     InputComponent,
     AngularFireStorageModule,
     AlertComponent,
     PercentPipe,
+    SafeURLPipe
   ],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.css',
@@ -64,19 +68,24 @@ export class UploadComponent implements OnDestroy {
 
   task?: AngularFireUploadTask;
 
+  screenshots: string[] = []
+
   constructor(
     private storage: AngularFireStorage,
     private auth: AngularFireAuth,
     private clipService: ClipService,
-    private router: Router
+    private router: Router,
+    public ffmpegService: FfmpegService
   ) {
     auth.user.subscribe((user) => (this.user = user));
+    ffmpegService.init();
   }
   ngOnDestroy(): void {
     this.task?.cancel();
   }
 
-  storeFile($event: Event) {
+  async storeFile($event: Event) {
+    console.log('storeFile called');
     this.isDragOver = false;
 
     this.file = ($event as DragEvent).dataTransfer
@@ -84,8 +93,12 @@ export class UploadComponent implements OnDestroy {
       : ($event.target as HTMLInputElement).files?.item(0) ?? null;
 
     if (!this.file || this.file.type !== 'video/mp4') {
+      console.log('this is not video/mp4');
       return;
     }
+
+    this.screenshots = await this.ffmpegService.getScreenshots(this.file);
+    console.log('getScreenshots called');
 
     this.title.setValue(this.file.name.replace(/\.[^/.]+$/, ''));
 
@@ -125,7 +138,7 @@ export class UploadComponent implements OnDestroy {
             title: this.title.value,
             fileName: `${clipFileName}.mp4`,
             url,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
           };
 
           const clipDocRef = await this.clipService.createClip(clip);
@@ -138,10 +151,8 @@ export class UploadComponent implements OnDestroy {
           this.showPercentage = false;
 
           setTimeout(() => {
-            this.router.navigate([
-              'clip', clipDocRef.id
-            ])
-          }, 1000)
+            this.router.navigate(['clip', clipDocRef.id]);
+          }, 1000);
         },
         error: (error) => {
           this.uploadForm.enable();
