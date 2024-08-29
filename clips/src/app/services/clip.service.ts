@@ -29,46 +29,40 @@ export class ClipService {
     return this.clipsCollection.add(data);
   }
 
-  getUserClips(sort$: BehaviorSubject<string>){
-    return combineLatest([
-      this.auth.user,
-      sort$
-    ]).pipe(
-      switchMap(values => {
-        const [user, sort] = values
+  getUserClips(sort$: BehaviorSubject<string>) {
+    return combineLatest([this.auth.user, sort$]).pipe(
+      switchMap((values) => {
+        const [user, sort] = values;
 
-        if(!user){
-          return of([])
+        if (!user) {
+          return of([]);
         }
 
-        const query = this.clipsCollection.ref.where(
-          'uid','==', user.uid
-        ).orderBy(
-          'timestamp',
-          sort === '1'? 'desc' : 'asc'
-        )
+        const query = this.clipsCollection.ref
+          .where('uid', '==', user.uid)
+          .orderBy('timestamp', sort === '1' ? 'desc' : 'asc');
 
-        return query.get()
+        return query.get();
       }),
-      map(snapshot => (snapshot as QuerySnapshot<IClip>).docs)
-    )
+      map((snapshot) => (snapshot as QuerySnapshot<IClip>).docs)
+    );
   }
 
-  updateClip(id: string, title: string){
+  updateClip(id: string, title: string) {
     return this.clipsCollection.doc(id).update({
-      title
-    })
+      title,
+    });
   }
 
-  async deleteClip(clip: IClip){
+  async deleteClip(clip: IClip) {
+    const clipRef = this.storage.ref(`clips/${clip.fileName}`);
+    const screenshotRef = this.storage.ref(
+      `screenshots/${clip.screenshotFileName}`
+    );
 
-    console.log(`deleting clips/${clip.fileName}`)
+    await clipRef.delete();
+    await screenshotRef.delete();
 
-    const clipRef = this.storage.ref(`clips/${clip.fileName}`)
-
-    await clipRef.delete()
-
-    await this.clipsCollection.doc(clip.docID).delete()
-
+    await this.clipsCollection.doc(clip.docID).delete();
   }
 }

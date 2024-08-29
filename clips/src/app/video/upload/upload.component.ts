@@ -18,13 +18,11 @@ import {
 import { v4 as uuid } from 'uuid';
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { PercentPipe } from '@angular/common';
-import { last, switchMap, timestamp } from 'rxjs';
+import { switchMap, combineLatest, forkJoin } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
 import { SafeURLPipe } from '../pipes/safe-url.pipe';
-import { from } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-upload',
@@ -135,26 +133,45 @@ export class UploadComponent implements OnDestroy {
     const clipRef = this.storage.ref(clipPath);
 
     this.screenshotTask = this.storage.upload(screenshotPath, screenshotBlob);
+    const screenshotRef = this.storage.ref(screenshotPath);
 
-    this.task.percentageChanges().subscribe((progress) => {
-      this.percentage = (progress as number) / 100;
+    combineLatest([
+      this.task.percentageChanges(),
+      this.screenshotTask.percentageChanges()
+    ])
+    .subscribe((progress) => {
+      const [clipProgress, screenshotProgress] = progress
+      if(!clipProgress || !screenshotProgress){
+        return
+      }
+      const total = clipProgress + screenshotProgress;
+
+      this.percentage = (total as number) / 200;
     });
 
-    this.task
-      .snapshotChanges()
+    forkJoin([
+      this.task.snapshotChanges(),
+      this.screenshotTask.snapshotChanges()
+    ])
       .pipe(
-        last(),
-        switchMap(() => clipRef.getDownloadURL())
+        switchMap(() => forkJoin([
+          clipRef.getDownloadURL(),
+          screenshotRef.getDownloadURL()
+        ]))
       )
       .subscribe({
-        next: async (url) => {
+        next: async (urls) => {
+          const [clipURL, screenshotURL] = urls;
+
           const clip = {
             uid: this.user?.uid as string,
             displayName: this.user?.displayName as string,
             title: this.title.value,
             fileName: `${clipFileName}.mp4`,
-            url,
+            url: clipURL,
+            screenshotURL,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            screenshotFileName: `${clipFileName}.png`
           };
 
           const clipDocRef = await this.clipService.createClip(clip);
