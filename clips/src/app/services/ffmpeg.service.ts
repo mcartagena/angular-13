@@ -11,24 +11,17 @@ export class FfmpegService {
   isRunning = false;
   isReady = false;
   private ffmpeg: FFmpeg;
-  message = '';
 
   constructor() {
     this.ffmpeg = new FFmpeg();
   }
 
   async init() {
-    console.log('calling ffmpegservice.init()');
+
     if (this.ffmpeg.loaded) {
-      console.log('isReady');
       this.isReady = true;
       return;
     }
-    console.log('is not ready');
-
-    this.ffmpeg.on('log', ({ message }) => {
-      this.message = message;
-    });
 
     await this.ffmpeg.load({
       coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
@@ -40,7 +33,7 @@ export class FfmpegService {
     });
 
     this.isReady = true;
-    console.log('now is ready');
+
   }
 
   async getScreenshots(file: File) {

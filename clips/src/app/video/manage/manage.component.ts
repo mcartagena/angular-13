@@ -1,4 +1,4 @@
-import { ClipService } from './../../servicves/clip.service';
+import { ClipService } from '../../services/clip.service';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute, Params } from '@angular/router';
 import IClip from '../../models/clip.model';

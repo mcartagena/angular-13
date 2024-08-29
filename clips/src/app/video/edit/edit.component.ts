@@ -4,7 +4,7 @@ import { ModalService } from '../../services/modal.service';
 import IClip from '../../models/clip.model';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { InputComponent } from '../../shared/input/input.component';
-import { ClipService } from '../../servicves/clip.service';
+import { ClipService } from '../../services/clip.service';
 import { NgClass, NgIf } from '@angular/common';
 import { AlertComponent } from '../../shared/alert/alert.component';
 
