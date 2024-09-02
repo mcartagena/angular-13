@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ClipService } from '../services/clip.service';
 import { NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { FbTimestampPipe } from '../pipes/fb-timestamp.pipe';
 
 @Component({
   selector: 'app-clips-list',
@@ -9,9 +11,11 @@ import { RouterLink } from '@angular/router';
   imports: [
     NgFor,
     RouterLink,
+    FbTimestampPipe,
   ],
   templateUrl: './clips-list.component.html',
-  styleUrl: './clips-list.component.css'
+  styleUrl: './clips-list.component.css',
+  providers:[DatePipe]
 })
 export class ClipsListComponent implements OnInit, OnDestroy{
 
