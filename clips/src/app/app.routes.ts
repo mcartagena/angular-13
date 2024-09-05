@@ -26,7 +26,8 @@ export const routes: Routes = [
     authOnly: true,
     authGuardPipe: redirectUnauthorizedToHome
   },
-  canActivate: [AngularFireAuthGuard]
+  canActivate: [AngularFireAuthGuard],
+  loadComponent: () => import('./video/manage/manage.component').then(m => m.ManageComponent)
 },
 {
   path: 'manage-clips',
