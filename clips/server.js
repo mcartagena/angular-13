@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const serveIndex = require('serve-index');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const ROOT = path.join('dist', 'clips', 'browser');
 
 app.use((_, res, next) => {
