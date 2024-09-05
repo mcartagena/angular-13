@@ -31,6 +31,8 @@ fileignoreconfig:
   checksum: 8ceffb676b9ec6df903204dd9d99e1a89b53a9d57864584c371d8aa30e130a77
 - filename: clips/template/video.html
   checksum: 8f112973e6e9c07166bb6900bcb433319379f7c7bfee5cbaf6b2f2f4ef0f22c8
+- filename: clips/vercel.json
+  checksum: f29ce76a62a2ca5c275f92f4d4b39b5667d0947515e61116829d3b1a100debf2
 - filename: image-effects/Cargo.lock
   checksum: b1c45c7c8a2b0d0fb0cb6d622f84d4d969a2484d8b5fa404aacb3cc01feffc09
 - filename: image-effects/dist/index.js
