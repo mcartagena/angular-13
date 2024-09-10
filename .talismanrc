@@ -5,6 +5,8 @@ fileignoreconfig:
   checksum: 3f2930cc63214fa4ef6c6d1c9a14ee427e30a9440fa99feac497cc00f59f54af
 - filename: clips/src/app/app.component.html
   checksum: ccce2d3fe2eaf0d32c96234c47cde1dd2a7314b470be141604cf55015ad209bd
+- filename: clips/src/app/app.component.spec.ts
+  checksum: 48984d3807e2289af67f3b4ddb592651eefed88bb97dc688d2b546f1969fd174
 - filename: clips/src/app/nav/nav.component.html
   checksum: 674eda342db9af4ff9568c00b2507bde7ae75d604ff3e0412d780d12ba72ba6a
 - filename: clips/src/app/shared/input/input.component.html
