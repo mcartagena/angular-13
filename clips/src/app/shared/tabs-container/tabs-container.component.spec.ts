@@ -42,7 +42,7 @@ describe('TabsContainerComponent', () => {
     const containerComponent = fixture.debugElement.query(By.directive(TabsContainerComponent));
     const tabsProp = containerComponent.componentInstance.tabs;
 
-    expect(tabs.length).toBe(2);
-    expect(tabsProp.length).toBe(2);
+    expect(tabs.length).withContext("Tabs did not render").toBe(2);
+    expect(tabsProp.length).withContext("Could not grab component property").toBe(2);
   })
 });
