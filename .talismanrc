@@ -3,6 +3,8 @@ fileignoreconfig:
   checksum: 450b5e381b4b60a90b0a8c2980ef163b8e0762664adfc2be8b7a5fdd905f9ea7
 - filename: basics/src/app/app.component.ts
   checksum: 3f2930cc63214fa4ef6c6d1c9a14ee427e30a9440fa99feac497cc00f59f54af
+- filename: clips/cypress/support/commands.ts
+  checksum: 9ab4cc15dcf6ab412324fabaf22001cbc683472530e45d98ceeefb985a745267
 - filename: clips/src/app/app.component.html
   checksum: ccce2d3fe2eaf0d32c96234c47cde1dd2a7314b470be141604cf55015ad209bd
 - filename: clips/src/app/app.component.spec.ts
