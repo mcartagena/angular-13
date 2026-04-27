@@ -1,5 +1,5 @@
 <!-- <div class="w-1/4 border-r border-b border-indigo-400"> -->
-  <button>
-    <ng-content />
-  </button>
+<button [class.is-command]="isCommand()" [class.is-double-size]="isDoubleSize()">
+  <ng-content />
+</button>
 <!-- </div> -->

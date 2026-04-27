@@ -18,8 +18,17 @@ export class CalculatorButton {
       typeof value === 'string' ? value === '' : value
   });
 
-  @HostBinding('class.is-command') get commandStyle() {
-    return this.isCommand();
+  public isDoubleSize = input(false, {
+    transform: (value: boolean | string) =>
+      typeof value === 'string' ? value === '' : value
+  });
+
+  // @HostBinding('class.is-command') get commandStyle() {
+  //   return this.isCommand();
+  // }
+
+  @HostBinding('class.w-2/4') get commandStyle() {
+    return this.isDoubleSize();
   }
 
 }
