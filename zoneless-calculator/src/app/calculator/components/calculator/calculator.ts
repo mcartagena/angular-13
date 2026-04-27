@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CalculatorButton } from '../calculator-button/calculator-button';
+import { NgClass } from "../../../../../node_modules/@angular/common/types/_common_module-chunk";
 
 @Component({
   selector: 'calculator',
