@@ -8,4 +8,8 @@ import { NgClass } from "../../../../../node_modules/@angular/common/types/_comm
   templateUrl: './calculator.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Calculator { }
+export class Calculator {
+  handleClick(key: string){
+    console.log({ key });
+  }
+ }
